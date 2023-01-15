@@ -1,7 +1,12 @@
 import tkinter as tk
+import os 
+import matplotlib
+if os.environ.get('DISPLAY','') == '':
+    print('no display found. Using non-interactive Agg backend. Please set `export DISPLAY=172.22.160.1:0` ')
+    matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg,
-NavigationToolbar2Tk)
+from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
+
 
 class Gui:
     def __init__(self, network, trees_names=None, title='Statystyki lasu', dims="1000x900"):
@@ -51,10 +56,11 @@ class Gui:
         label.grid(row=row, column=0, pady=10, padx=15)
 
         row += 1
-        it = 1
+        it = 0
         for key, values in data.items():
             if key != 'drzewo':
-                self.plot(key, values.keys(), values.values(), row, it%2)
+                print(key, row, it)
+                self.plot(key, values.keys(), values.values(), row, it)
                 it+=1
                 row += int(it/5)
 
@@ -65,13 +71,13 @@ class Gui:
                      dpi=65)
 
         # adding the subplot
-        plot1 = fig.add_subplot(111)
+        plot1 = fig.add_subplot(1, 1, 1)
 
         # plotting the graph
         plot1.bar(data_labels, data_values)
 
         plot1.set_xlabel(title)
-        plot1.set_ylabel('%')
+        plot1.set_ylabel('udzial')
         plot1.set_title(title)
 
         # creating the Tkinter canvas
