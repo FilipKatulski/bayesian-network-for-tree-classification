@@ -6,7 +6,7 @@ def main():
     print("Before:")
     print(N.current_state)
 
-    gui = Gui(N, N.current_state['trees'])
+    gui = Gui(N, N.current_state['drzewo'].keys())
 
     # trees = {
     #     'brzoza': 0.3,

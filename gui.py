@@ -53,9 +53,10 @@ class Gui:
         row += 1
         it = 1
         for key, values in data.items():
-            self.plot(key, values.keys(), values.values(), row, it%2)
-            it+=1
-            row += int(it/5)
+            if key != 'drzewo':
+                self.plot(key, values.keys(), values.values(), row, it%2)
+                it+=1
+                row += int(it/5)
 
 
     def plot(self, title, data_labels, data_values, row, col):
