@@ -22,7 +22,7 @@ pysmile.License((
 	0xc8,0x76,0x43,0x64,0x93,0x0f,0x24,0x92,0x14,0x47,0x59,0xda,0xf5,0x4a,0x45,0xb6])
 
 
-class BayesNetwork():
+class BayesNetwork:
 	def __init__(self, path_to_network_file) -> None:
 		self.net = self.load_network(path = path_to_network_file)
 		self.current_state = self.load_current_state(self.net)
@@ -97,22 +97,22 @@ class BayesNetwork():
 		for handle in self.net.get_all_nodes():
 			self.print_posteriors(self.net, handle)
 
-def main():
-	N = BayesNetwork(path_to_network_file="networks/Network1.xdsl")
-	print("Before:")
-	print(N.current_state)
-	
-	trees =	{
-		'brzoza': 0.3, 
-		'dab': 0.3, 
-		'swierk': 0.35, 
-		'sosna': 0.05000000000000004
-	}
-	
-	N.update_trees(tree_data=trees)
-	print("After:")
-	print(N.current_state)
-
-
-if __name__ == '__main__':
-    main()
+# def main():
+# 	N = BayesNetwork(path_to_network_file="networks/Network1.xdsl")
+# 	print("Before:")
+# 	print(N.current_state)
+#
+# 	trees =	{
+# 		'brzoza': 0.3,
+# 		'dab': 0.3,
+# 		'swierk': 0.35,
+# 		'sosna': 0.05000000000000004
+# 	}
+#
+# 	N.update_trees(tree_data=trees)
+# 	print("After:")
+# 	print(N.current_state)
+#
+#
+# if __name__ == '__main__':
+#     main()

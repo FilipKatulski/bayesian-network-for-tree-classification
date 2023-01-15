@@ -4,38 +4,45 @@ from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg,
 NavigationToolbar2Tk)
 
 class Gui:
-    def __init__(self, trees_names=None, title='Statystyki lasu', dims="1000x900"):
+    def __init__(self, network, trees_names=None, title='Statystyki lasu', dims="1000x900"):
+        self.network = network
         if trees_names is None:
-            trees_names = ['Brzoza', 'Dab', 'Jesion', 'Sosna', 'Swierk', 'Inne']
+            trees_names = ['brzoza', 'dab', 'swierk', 'sosna',  'Inne']
         self.window = tk.Tk()
         self.trees_entries = {name:None for name in trees_names}
 
-
         self.build_window(title, dims, trees_names)
-
         self.window.mainloop()
 
     def get_stats(self):
         trees_data = {}
+        all = 0
         for key, val in self.trees_entries.items():
-            trees_data[key] = val.get()
+            trees_data[key] = int(val.get())
+            all += trees_data[key]
+
+        for key, val in trees_data.items():
+            trees_data[key] = float(val/all)
 
         print(trees_data)
+        self.network.update_trees(tree_data=trees_data)
 
         # get data from network
-        data = {
-            'rodzaj_lisci':
-                {
-                    'igly':10,
-                    'blaszki':40,
-                    'łuski':50
-                },
-            'kolor kory': {
-                'bialy':10,
-                'czarny':30,
-                'brazowy':60
-                }
-        }
+        # data = {
+        #     'rodzaj_lisci':
+        #         {
+        #             'igly':10,
+        #             'blaszki':40,
+        #             'łuski':50
+        #         },
+        #     'kolor kory': {
+        #         'bialy':10,
+        #         'czarny':30,
+        #         'brazowy':60
+        #         }
+        # }
+
+        data = self.network.current_state
 
         # display charts
         row = len(self.trees_entries.keys())+2
@@ -112,4 +119,4 @@ class Gui:
 
 
 
-gui = Gui()
+# gui = Gui()
