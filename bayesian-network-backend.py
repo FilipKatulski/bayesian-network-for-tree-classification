@@ -29,18 +29,78 @@ def load_network(path: str) -> pysmile.Network:
 
 	return net 
 
-def load_node_ids(network: pysmile.Network):
+def load_current_state(network: pysmile.Network) -> dict:
+	"""
+	Loads the current state of the network, returns in a form of dict of dicts.
+
+	The shape created by the function:
+	data = {
+        'rodzaj_lisci':
+            {
+                'igly':10,
+                'blaszki':40,
+                'łuski':50
+            },
+        'kolor kory': {
+            'bialy':10,
+            'czarny':30,
+            'brazowy':60
+            }
+    }
+
+	"""
+	data = {}
 	node_ids = network.get_all_node_ids() 
 	for id in node_ids:
-		print(id, network.get_node_value(id))
+		# print(id, network.get_node_value(id))
+		sub_data = {}
 		for i in range(0, len(network.get_node_value(id))):
-			print(network.get_outcome_id(id, i), "=", str(network.get_node_value(id)[i]))
+			
+			# print( "-", network.get_outcome_id(id, i), "=", str(network.get_node_value(id)[i]))
+			sub_data[network.get_outcome_id(id, i)] = network.get_node_value(id)[i]
+		# print(sub_data)
+		data[id] = sub_data
+	return data
+
+def update_trees(network: pysmile.Network, tree_data: dict) -> pysmile.Network:
+	"""
+	Updates the "drzewo" node in the network, returns the new network.
+	The parameter 'tree_data' should look like: 
+	{
+		'brzoza': 0.1, 
+		'dab': 0.5, 
+		'swierk': 0.35, 
+		'sosna': 0.05000000000000004
+	}
+	"""
+	net = network
+	probabilities = []
+
+	for tree in tree_data.items():
+		#print(tree[1], type(tree[1]))
+		probabilities.append(tree[1])
+	
+	net.set_node_definition('drzewo', probabilities)
+	net.update_beliefs()
+	return net
 
 
 def main():
 	net = load_network("networks/Network1.xdsl")
-	load_node_ids(network=net)
+	curr_state = load_current_state(network=net)
+	print(curr_state) 
 
+	trees =	{
+		'brzoza': 0.3, 
+		'dab': 0.3, 
+		'swierk': 0.35, 
+		'sosna': 0.05000000000000004
+	}
+
+
+	new_net = update_trees(network=net, tree_data=trees)
+
+	print(load_current_state(network=new_net))
 
 
 if __name__ == '__main__':
