@@ -2,7 +2,7 @@ import tkinter as tk
 import os 
 import matplotlib
 if os.environ.get('DISPLAY','') == '':
-    print('no display found. Using non-interactive Agg backend. Please set `export DISPLAY=172.22.160.1:0` ')
+    print('no display found. Using non-interactive Agg backend. Please set `export DISPLAY={localhost}:0` ')
     matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
@@ -31,21 +31,6 @@ class Gui:
 
         print(trees_data)
         self.network.update_trees(tree_data=trees_data)
-
-        # get data from network
-        # data = {
-        #     'rodzaj_lisci':
-        #         {
-        #             'igly':10,
-        #             'blaszki':40,
-        #             'łuski':50
-        #         },
-        #     'kolor kory': {
-        #         'bialy':10,
-        #         'czarny':30,
-        #         'brazowy':60
-        #         }
-        # }
 
         data = self.network.current_state
 
@@ -89,14 +74,6 @@ class Gui:
         # placing the canvas on the Tkinter window
         canvas.get_tk_widget().grid(row=row, column=col, pady=15, padx=5)
 
-        # creating the Matplotlib toolbar
-        # toolbar = tk.NavigationToolbar2Tk(canvas,
-        #                                self.window)
-        # toolbar.update()
-
-        # placing the toolbar on the Tkinter window
-        # canvas.get_tk_widget().pack()
-
     def build_window(self, title, dims, trees_names):
         self.window.title(title)
         self.window.geometry(dims)
@@ -122,8 +99,3 @@ class Gui:
         )
 
         button.grid(row=len(trees_names)+1, column=1, pady=15, padx=5)
-
-
-
-
-# gui = Gui()
