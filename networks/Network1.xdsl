@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This network was created in GeNIe Academic, which can be used for academic teaching and research purposes only -->
+<smile version="1.0" id="Network1" numsamples="10000" discsamples="10000">
+	<nodes>
+		<cpt id="drzewo">
+			<state id="brzoza" />
+			<state id="dab" />
+			<state id="swierk" />
+			<state id="sosna" />
+			<probabilities>0.1 0.5 0.35 0.05000000000000004</probabilities>
+		</cpt>
+		<cpt id="występowanie_w_Polsce">
+			<state id="broza_pl" />
+			<state id="dab_pl" />
+			<state id="swierk_pl" />
+			<state id="sosna_pl" />
+			<state id="inne_pl" />
+			<parents>drzewo</parents>
+			<probabilities>0.075 0.075 0.064 0.585 0.2010000000000001 0.075 0.075 0.064 0.585 0.2010000000000001 0.075 0.075 0.064 0.585 0.2010000000000001 0.075 0.075 0.064 0.585 0.2010000000000001</probabilities>
+		</cpt>
+		<cpt id="kolor_kory">
+			<state id="bialy" />
+			<state id="brazowy" />
+			<state id="czarny" />
+			<parents>drzewo</parents>
+			<probabilities>1 0 0 0 0.5 0.5 0 0.5 0.5 0 0 1</probabilities>
+		</cpt>
+		<deterministic id="rodzaj_lisci">
+			<state id="igly" />
+			<state id="liscie" />
+			<parents>drzewo</parents>
+			<resultingstates>liscie liscie igly igly</resultingstates>
+		</deterministic>
+		<cpt id="ksztalt_lisci">
+			<state id="dlugie" />
+			<state id="krotkie" />
+			<state id="pofalowane" />
+			<state id="zabkowane" />
+			<parents>rodzaj_lisci</parents>
+			<probabilities>0.5 0.5 0 0 0 0 0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="owoce">
+			<state id="szyszki" />
+			<state id="zoledzie" />
+			<state id="owoce_brzozy" />
+			<parents>drzewo</parents>
+			<probabilities>0 0 1 0 1 0 1 0 0 1 0 0</probabilities>
+		</cpt>
+	</nodes>
+	<extensions>
+		<genie version="1.0" app="GeNIe 4.0.2423.0 ACADEMIC" name="Network1">
+			<node id="kolor_kory">
+				<name>kolor_kory</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>456 134 504 164</position>
+				<barchart active="true" width="128" height="64" />
+			</node>
+			<node id="owoce">
+				<name>owoce</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>734 522 782 552</position>
+				<barchart active="true" width="128" height="72" />
+			</node>
+			<node id="drzewo">
+				<name>drzewo</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>641 349 695 382</position>
+				<barchart active="true" width="128" height="90" />
+			</node>
+			<node id="ksztalt_lisci">
+				<name>ksztalt_lisci</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>1038 184 1086 214</position>
+				<barchart active="true" width="139" height="90" />
+			</node>
+			<node id="rodzaj_lisci">
+				<name>rodzaj_lisci</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>805 173 860 210</position>
+				<barchart active="true" width="128" height="54" />
+			</node>
+			<node id="występowanie_w_Polsce">
+				<name>występowanie_w_Polsce</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>343 407 391 437</position>
+				<barchart active="true" width="128" height="108" />
+			</node>
+		</genie>
+	</extensions>
+</smile>
